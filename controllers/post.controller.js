@@ -7,11 +7,12 @@ const UserModel = require('../models/user.model');
 exports.createPost = async (req, res) => {
   const reqBody = req.body;
   const { title, description, tags, body, state } = reqBody;
-  // if (!title || !description || !tags || !body) {
-  //   return res.json({
-  //     message: 'unable to create blog as there is a missing credential',
-  //   });
-  // }
+  console.log('working');
+  if (!title || !body) {
+    return res.json({
+      message: 'unable to create blog as there is a missing credential',
+    });
+  }
 
   const { user } = req;
   // estimating reading time
@@ -24,7 +25,7 @@ exports.createPost = async (req, res) => {
   const blog = await BlogModel.create({
     title,
     description,
-    fullName: `${findUser.firstName} ${findUser.lastName}`,
+    // : `${findUser.firstName} ${findUser.lastName}`,
     reading_time: time,
     author: findUser._id,
     tags,
@@ -48,7 +49,7 @@ exports.getPosts = async (req, res) => {
   }
 
   if (author) {
-    searchBy.fullName = { $regex: author, $options: 'i' };
+    searchBy.author = { $regex: author, $options: 'i' };
   }
 
   if (tags) {
@@ -103,19 +104,20 @@ exports.getPosts = async (req, res) => {
         read_count: 1,
         reading_time: 1,
         tags: 1,
-        timestamps: 1,
+        timestamp: 1,
       },
     },
     {
       $sort: orderQuery,
     },
     {
-      $limit: limit * 1,
-    },
-    {
       $skip: (page - 1) * limit,
     },
+    {
+      $limit: limit * 1,
+    },
   ]);
+  console.log((page - 1) * limit);
 
   return res.json(posts);
 };
@@ -156,7 +158,7 @@ exports.getSinglePostByID = async (req, res) => {
         read_count: 1,
         reading_time: 1,
         tags: 1,
-        timestamps: 1,
+        timestamp: 1,
         author_doc: {
           name: {
             $concat: ['$authorDoc.lastName', ' ', '$authorDoc.firstName'],
@@ -297,7 +299,7 @@ exports.getOwnPostById = async (req, res) => {
         read_count: 1,
         reading_time: 1,
         tags: 1,
-        timestamps: 1,
+        timestamp: 1,
         author_doc: {
           name: {
             $concat: ['$authorDoc.lastName', ' ', '$authorDoc.firstName'],

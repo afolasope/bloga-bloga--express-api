@@ -1,10 +1,9 @@
-const { json } = require('body-parser');
 const passport = require('passport');
 const UserModel = require('./models/user.model');
 const localStrategy = require('passport-local').Strategy;
 const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
-
+const validator = require('validator')
 passport.use(
   new JWTstrategy(
     {
@@ -32,17 +31,22 @@ passport.use(
     async (req, email, password, done) => {
       const { firstName, lastName } = req.body;
 
+      if (!validator.isEmail(email)) {
+        return done(null, false, {
+          message: 'Email address provided is invalid',
+        });
+      }
+
       try {
         const checkUser = await UserModel.findOne({ email: email });
         if (checkUser) {
-          return done('email already in use');
+          return done(null, false, { message: 'Email address already in use' });
         }
         const user = await UserModel.create({
           email,
           password,
           firstName,
           lastName,
-          fullName: `${firstName} ${lastName}`,
         });
         if (!user) {
           console.log('no user created');

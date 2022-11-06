@@ -18,7 +18,7 @@ describe('Auth: Signup', () => {
     await conn.disconnect();
   });
 
-  xit('should signup a user', async () => {
+  it('should signup a user', async () => {
     const response = await request(app)
       .post('/auth/signup')
       .set('content-type', 'application/json')
@@ -36,7 +36,7 @@ describe('Auth: Signup', () => {
     expect(response.body.user).not.toHaveProperty('password', 'xoxoxo');
   });
 
-  xit('should login a user', async () => {
+  it('should login a user', async () => {
     // create user in out db
     const user = await UserModel.create({
       email: 'tobi',

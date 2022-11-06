@@ -5,6 +5,7 @@ require('dotenv').config();
 
 exports.signup = async (req, res) => {
   const { email, firstName, lastName, _id } = req.user;
+  console.log('working');
 
   return res.status(201).json({
     user: {

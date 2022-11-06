@@ -16,15 +16,10 @@ const BlogSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   author: {
     type: Schema.Types.ObjectId,
     ref: 'users',
-  },
-  fullName: {
-    type: String,
-    required: true,
   },
   state: {
     type: String,
@@ -33,18 +28,15 @@ const BlogSchema = new Schema({
   read_count: {
     type: Number,
     default: 0,
-    required:true
   },
   reading_time: {
     type: Number,
-    required: true,
   },
   tags: [{ type: String }],
   timestamp: {
     type: Schema.Types.Date,
     default: Date.now,
     immutable: true,
-    required: true,
   },
 });
 

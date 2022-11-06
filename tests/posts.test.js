@@ -63,7 +63,7 @@ describe('Posts Route', () => {
     expect(response.body).toHaveProperty('state');
   });
 
-  xit('should return all published posts for logged in and not logged in users', async () => {
+  it('should return all published posts for logged in and not logged in users', async () => {
     const allBlogs = await BlogModel.insertMany([...published, ...drafts]);
 
     const response = await request(app)
@@ -71,7 +71,8 @@ describe('Posts Route', () => {
       .set('content-type', 'application/json');
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(published.length);
-    expect(response.body.every((obj) => obj.state === 'published').toBe(true));
+    expect(response.body.every((obj) => obj.state === 'published')).toBe(true);
+    console.log(response.body.length, published.length);
   });
   it('should return single published posts for logged in and not logged in users', async () => {
     const blog = await BlogModel.create(published[0]);
@@ -106,7 +107,7 @@ describe('Posts Route', () => {
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
-  xit('should edit single post by registered user', async () => {
+  it('should edit single post by registered user', async () => {
     const blog = await BlogModel.create(
       createRandomBlogs(1, 'draft', user._id)
     );

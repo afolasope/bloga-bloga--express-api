@@ -6,12 +6,19 @@ const AuthController = require('../controllers/auth.controller');
 
 const authRouter = express.Router();
 
-authRouter.post(
-  '/signup',
-  passport.authenticate('signup', { session: false }),
-  AuthController.signup
-);
+authRouter.post('/signup', async (req, res, next) =>
+  passport.authenticate('signup', (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (user) {
+      req.user = user;
+      return AuthController.signup(req, res);
+    }
 
+    return res.send(400, info);
+  })(req, res, next)
+);
 
 authRouter.post('/login', async (req, res, next) =>
   passport.authenticate('login', (err, user, info) => {

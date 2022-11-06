@@ -24,11 +24,14 @@ This is an api for a Blog
 
 ---
 
+https://www.getpostman.com/collections/57dd34b5218b0b9b1dd1
+
 ## Setup
 
 - Install NodeJS, mongodb
 - pull this repo
 - update env with example.env
+- run `npm install`
 - run `npm run start:dev`
 
 ---
@@ -46,9 +49,9 @@ This is an api for a Blog
 | field     | data_type | constraints |
 | --------- | --------- | ----------- | ------------------------------------------------ | --- |
 | id        | string    | required    |
-| firstname | string    | optional    |
-| lastname  | string    | optional    |
-| email     | string    | optional    |
+| firstname | string    | required    |
+| lastname  | string    | required    |
+| email     | string    | required    |
 | password  | string    | required    |
 | <!--      | user_type | string      | required, default: user, enum: ['user', 'admin'] | --> |
 
@@ -59,14 +62,16 @@ This is an api for a Blog
 | id           | string    | required                 |
 | title        | string    | required                 | unique |
 | body         | string    | required                 |
-| description  | string    | required                 |
-| author       | string    | required                 |
+| description  | string    | optional                 |
+| author       | string    | optional                 |
 | timestamp    | date      | required                 |
 | state        | number    | required,default:'draft' |
-| read_count   | number    | required                 |
-| reading_time | number    | required                 |
-| tags         | array     | required                 |
+| read_count   | number    | optional                 |
+| reading_time | number    | optional                 |
+| tags         | array     | optional                 |
 
+### Postman collection
+https://www.getpostman.com/collections/57dd34b5218b0b9b1dd1
 ## APIs
 
 ---
@@ -176,7 +181,6 @@ Success
     "body": "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidemrepellat excepturi ut quia\nsunt ut sequi eos ea sed quas",
     "description": "description",
     "author": "635ffcb799aa94dab9c35ba6",
-    "fullName": "fola sope",
     "state": "draft",
     "read_count": 0,
     "reading_time": "1m",
@@ -185,7 +189,7 @@ Success
         "ipsum"
     ],
     "_id": "6362df9ea2c0d67fd6780de6",
-    "timestamps": "2022-11-02T21:22:38.621Z",
+    "timestamp: "2022-11-02T21:22:38.621Z",
     }
 ```
 
@@ -222,7 +226,7 @@ Success
     "tags": [
         "index"
     ],
-    "timestamps": "2022-10-31T17:34:26.355Z"
+    "timestamp": "2022-10-31T17:34:26.355Z"
 }]
 ```
 
@@ -250,7 +254,7 @@ Success
         "tags": [
             "index"
         ],
-        "timestamps": "2022-10-31T17:34:26.355Z",
+        "timestamp": "2022-10-31T17:34:26.355Z",
         "author_doc": {
             "name": "sope fola",
             "email": "fola@gmail.com"
@@ -289,7 +293,6 @@ Success
         "body": "ignissimos aperiam dolorem qui eum\nfacilis quibusdam animi sint suscipit qui sint possimus cum\nquaerat magni maiores excepturi\nipsam ut commodi dolor voluptatum modi aut vitae ignissimos aperiams quo nemo aut saepe\nquidem repellat excepturi ut quia\nsunt ut sequi eos ea sed quas",
         "description": "ipsum teet",
         "author": "635ffcb799aa94dab9c35ba6",
-        "fullName": "fola sope",
         "state": "draft",
         "read_count": 1,
         "reading_time": "1m",
@@ -297,7 +300,7 @@ Success
             "sint",
             "qui"
         ],
-        "timestamps": "2022-10-31T17:35:04.482Z",
+        "timestamp": "2022-10-31T17:35:04.482Z",
     },
 ]
 
@@ -327,7 +330,7 @@ Success
         "tags": [
             "index"
         ],
-        "timestamps": "2022-10-31T17:34:26.355Z",
+        "timestamp": "2022-10-31T17:34:26.355Z",
         "author_doc": {
             "name": "sope fola",
             "email": "fola@gmail.com"
@@ -364,13 +367,12 @@ Success
     "body": "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidem repellat    excepturi ut quia\nsunt ut sequi eos ea sed quas",
     "description": "description",
     "author": "635ffcb799aa94dab9c35ba6",
-    "fullName": "fola sope",
     "state": "published",
     "read_count": 3,
     "reading_time": "1m",
     "tags":["dolor", "ipsum"],
 
-    "timestamps": "2022-10-31T18:35:46.237Z",
+    "timestamp": "2022-10-31T18:35:46.237Z",
 }
 ```
 
