@@ -11,11 +11,11 @@ require('./passport');
 
 (async () => {
   await BlogModel.insertMany(
-    createRandomBlogs(29, 'published', '636827bab47cb2593c8bf17b')
+    createRandomBlogs(39, 'published', '6368307a578fbee59a071a77')
   );
 })();
 // (async () => {
-//   await createRandomUsers(4)
+//   await createRandomUsers(10)
 // })();
 
 const app = express();
