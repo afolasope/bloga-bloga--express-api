@@ -41,6 +41,8 @@ describe('Auth: Signup', () => {
     const user = await UserModel.create({
       email: 'tobi',
       password: '123456',
+      firstName: 'tobi',
+      lastName:'tobi'
     });
 
     // login user
@@ -50,6 +52,8 @@ describe('Auth: Signup', () => {
       .send({
         email: 'tobi',
         password: '123456',
+        firstName: 'tobi',
+        lastName:'tobi'
       });
 
     expect(response.status).toBe(200);

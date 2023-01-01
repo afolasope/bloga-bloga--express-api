@@ -9,11 +9,11 @@ const BlogModel = require('./models/blog.model.js');
 
 require('./passport');
 
-(async () => {
+/* (async () => {
   await BlogModel.insertMany(
     createRandomBlogs(39, 'published', '6368307a578fbee59a071a77')
   );
-})();
+})();*/
 // (async () => {
 //   await createRandomUsers(10)
 // })();
@@ -31,5 +31,4 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({ error: err.message });
 });
-
 module.exports = app;

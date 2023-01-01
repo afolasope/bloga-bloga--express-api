@@ -72,7 +72,6 @@ describe('Posts Route', () => {
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(published.length);
     expect(response.body.every((obj) => obj.state === 'published')).toBe(true);
-    console.log(response.body.length, published.length);
   });
   it('should return single published posts for logged in and not logged in users', async () => {
     const blog = await BlogModel.create(published[0]);

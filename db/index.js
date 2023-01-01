@@ -12,7 +12,6 @@ function connectToMongoDB() {
   });
   mongoose.connection.on('error', (error) => {
     console.log('connection failed');
-    console.log(error);
   });
 }
 

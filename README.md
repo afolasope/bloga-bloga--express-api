@@ -197,13 +197,13 @@ Success
 
 - Route: posts/
 - Method: GET
-- Query params: if a query starts with negative (-) sign it sorts from descending to ascending and vice versa, like in the case of time -timestamp
+- Query parameters: if a query starts with negative (-) sign it sorts from descending to ascending and vice versa, like in the case of time -timestamp
     - page (default: 1)
     - limit (default: 20)
     - author
     - title
     - tags
-    - order_by(default: -timestamp)
+    - order_by (default: -timestamp)
         - author
         - title
         - tags

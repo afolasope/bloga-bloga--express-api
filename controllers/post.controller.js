@@ -7,7 +7,7 @@ const UserModel = require('../models/user.model');
 exports.createPost = async (req, res) => {
   const reqBody = req.body;
   const { title, description, tags, body, state } = reqBody;
-  console.log('working');
+  // console.log('working'); 
   if (!title || !body) {
     return res.json({
       message: 'unable to create blog as there is a missing credential',
@@ -117,7 +117,6 @@ exports.getPosts = async (req, res) => {
       $limit: limit * 1,
     },
   ]);
-  console.log((page - 1) * limit);
 
   return res.json(posts);
 };
@@ -250,18 +249,6 @@ exports.getOwnPosts = async (req, res) => {
   if (!ownPosts) {
     return res.json(ownPosts);
   }
-
-
-  // const post = ownPosts[0];
-  // const readCount = post.read_count + 1;
-
-  // await BlogModel.updateOne(
-  //   { _id: new Types.ObjectId(id) },
-  //   { read_count: readCount }
-  // );
-
-  // post.read_count = readCount;
-  // return res.status(200).json(post);
 
   return res.json(ownPosts);
 };
