@@ -7,7 +7,7 @@ const UserModel = require('../models/user.model');
 exports.createPost = async (req, res) => {
   const reqBody = req.body;
   const { title, description, tags, body, state } = reqBody;
-  // console.log('working'); 
+  // console.log('working');
   if (!title || !body) {
     return res.json({
       message: 'unable to create blog as there is a missing credential',
@@ -37,9 +37,8 @@ exports.createPost = async (req, res) => {
 };
 
 exports.getPosts = async (req, res) => {
+  // search by
   const { author, title, tags, page = 1, limit = 20 } = req.query;
-  let { sort_by } = req.query;
-
   const searchBy = {
     state: 'published',
   };
@@ -62,8 +61,9 @@ exports.getPosts = async (req, res) => {
       };
     }
   }
-
   // sort
+  let { sort_by } = req.query;
+
   sort_by = sort_by || '-timestamp';
   const orderQuery = {};
   const sortAttributes = sort_by.split(',');
@@ -90,9 +90,6 @@ exports.getPosts = async (req, res) => {
       $unwind: '$authorDoc',
     },
     {
-      $match: searchBy,
-    },
-    {
       $project: {
         title: 1,
         state: 1,
@@ -109,6 +106,9 @@ exports.getPosts = async (req, res) => {
     },
     {
       $sort: orderQuery,
+    },
+    {
+      $match: searchBy,
     },
     {
       $skip: (page - 1) * limit,
