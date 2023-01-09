@@ -2,12 +2,15 @@ const { CommentModel } = require('../models/comment.model');
 
 exports.createComment = async (req, res) => {
   const { id } = req.params;
-  const { user, text } = req.body;
+  const { user } = req;
+  console.log(user);
+
+  const { userID, text } = req.body;
 
   const comment = await CommentModel.create({
     postID: id,
     text,
-    user,
+    userID: user.email,
     createdAt: Date.now(),
   });
 

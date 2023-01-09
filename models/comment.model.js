@@ -13,8 +13,9 @@ const CommentSchema = new Schema({
     type: String,
     required: true,
   },
-  user: {
+  userID: {
     type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
