@@ -6,6 +6,7 @@ const authRouter = require('./routes/auth.router.js');
 const { createRandomUsers } = require('./factory/user.factory');
 const { createRandomBlogs } = require('./factory/blogs.factory.js');
 const BlogModel = require('./models/blog.model.js');
+const { commentRouter } = require('./routes/comment.router.js');
 
 require('./passport');
 
@@ -26,6 +27,7 @@ app.get('/', (req,res) => {
 });
 app.use('/auth', authRouter);
 app.use('/posts', postRouter);
+app.use('/posts', commentRouter)
 
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
